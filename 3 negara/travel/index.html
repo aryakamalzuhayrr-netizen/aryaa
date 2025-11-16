@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Japan Tours — Landing</title>
+  <meta name="description" content="Landing page lengkap dengan navbar responsif, animasi, smooth scrolling, dark mode, carousel, dan form via WhatsApp." />
+  <style>
+    /* RESET */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial}
+    body{background:#f4f4f4;color:#222;transition:background .3s,color .3s}
+    :root{
+      --accent:#e6c07b;
+      --dark:#0b0b0b;
+      --light:#ffffff;
+    }
+    body.dark{background:#0f0f0f;color:#eee}
+
+    /* NAVBAR */
+    header{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;position:sticky;top:0;background:rgba(0,0,0,0.35);backdrop-filter:blur(10px);z-index:50}
+    .logo{font-weight:700;color:#fff;font-size:20px}
+    nav{display:flex;gap:22px}
+    nav a{color:#fff}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hamburger span{width:26px;height:3px;background:#fff;border-radius:3px}
+    @media(max-width:768px){nav{display:none}nav.active{display:flex;flex-direction:column;position:absolute;right:20px;top:60px;background:rgba(0,0,0,0.8);padding:16px;border-radius:10px}.hamburger{display:flex}}
+
+    /* DARK MODE */
+    .mode-toggle{cursor:pointer;color:#fff;font-size:14px;border:1px solid #fff;padding:6px 10px;border-radius:8px}
+
+    /* HERO */
+    .hero{position:relative;height:500px;overflow:hidden;border-radius:10px;margin:26px}
+    .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+    .hero h1{position:absolute;left:40px;bottom:60px;font-size:110px;color:#fff;animation:fadeIn 1.2s}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+    /* CAROUSEL */
+    .carousel{position:absolute;bottom:20px;left:40px;display:flex;gap:10px}
+    .carousel img{width:110px;height:70px;border-radius:8px;object-fit:cover;opacity:.65;cursor:pointer;transition:.2s}
+    .carousel img:hover{opacity:1;transform:scale(1.05)}
+
+    /* CONTENT */
+    section{margin:40px auto;max-width:1100px;padding:20px}
+    .included-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{background:rgba(0,0,0,0.6);color:#fff;padding:16px;border-radius:12px}
+
+    /* TIMELINE */
+    .timeline{border-left:2px solid #aaa;margin-left:20px;padding-left:20px;display:flex;flex-direction:column;gap:20px}
+    .stop{position:relative}
+    .stop::before{content:'';position:absolute;left:-28px;top:5px;width:14px;height:14px;background:var(--accent);border-radius:50%}
+    .stop img{width:140px;border-radius:10px;margin-top:8px}
+
+    /* FORM */
+    form{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    input,textarea{padding:10px;border-radius:8px;border:1px solid #ccc}
+    button{padding:10px;border-radius:8px;border:0;background:var(--accent);font-weight:700;cursor:pointer}
+
+    /* Smooth scroll */
+    html{scroll-behavior:smooth}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JAPAN TOURS</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#included">Included</a>
+      <a href="#contacts">Contact</a>
+    </nav>
+    <div class="mode-toggle" onclick="toggleDark()">Dark Mode</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+<img id="heroImg" src="images/japan.jpg" />
+    <h1>JAPAN TOURS</h1>
+    <div class="carousel">
+      <img src="images/japan2.jpg" onclick="changeHero(this.src)">
+      <img src="images/japan3.jpg" onclick="changeHero(this.src)">
+      <img src="images/japan4.jpg" onclick="changeHero(this.src)">
+    </div>
+  </div>
+</script>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>ABOUT THE TOUR</h2>
+    <p>10 hari perjalanan ke Osaka, Kyoto, dan Tokyo. Semua sudah diatur.</p>
+
+    <div class="timeline">
+      <div class="stop"><strong>Days 1-3: Osaka</strong><img src="images/osaka.jpg"></div>
+      <div class="stop"><strong>Days 4-6: Kyoto</strong><img src="images/kyoto.jpg"></div>
+      <div class="stop"><strong>Days 7-10: Tokyo</strong><img src="images/tokyo.jpg"></div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <section id="included">
+    <h2>WHAT'S INCLUDED</h2>
+    <div class="included-grid">
+      <div class="card">Guides<br>2 pemandu profesional.</div>
+      <div class="card">Flights<br>Penerbangan pulang-pergi.</div>
+      <div class="card">Transfers<br>Penjemputan bandara.</div>
+      <div class="card">Hotels<br>Hotel + Sarapan.</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacts">
+  <form id="whatsappForm">
+    <label>Nama:</label>
+    <input type="text" id="name" required><br>
+    <label>Email:</label>
+    <input type="email" id="email" required><br>
+    <label>Pesan:</label>
+    <textarea id="message" rows="5" required></textarea><br>
+    <button type="submit">Kirim via WhatsApp</button>
+</form>
+<script>
+document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let nama = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let pesan = document.getElementById("message").value;
+    let nomor = "6287775080321";
+
+    let url = "https://wa.me/" + nomor + 
+        "?text=Nama:%20" + encodeURIComponent(nama) +
+        "%0AEmail:%20" + encodeURIComponent(email) +
+        "%0APesan:%20" + encodeURIComponent(pesan);
+
+    window.open(url, "_blank");
+});
+
+// MENU TOGGLE
+function toggleMenu(){
+    document.querySelector('nav').classList.toggle('active');
+}
+
+// DARK MODE
+function toggleDark(){
+    document.body.classList.toggle('dark');
+}
+
+// GANTI HERO MANUAL
+function changeHero(src){
+    document.getElementById('heroImg').src = src;
+}
+
+// AUTO SLIDE HERO
+let heroImages = [
+  "images/japan.jpg",
+  "images/japan2.jpg",
+  "images/japan3.jpg",
+  "images/japan4.jpg"
+];
+
+let currentHero = 0;
+
+setInterval(() => {
+  currentHero = (currentHero + 1) % heroImages.length;
+  document.getElementById("heroImg").src = heroImages[currentHero];
+}, 3000);
+</script>
+</body>
+</html>
